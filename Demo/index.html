@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery.ModalWinDoh | Demo</title>
+        <style>
+        	body {
+        		/*width: 960px;
+        		margin: 0 auto;*/
+        	}
+
+        	#modalWinDohOverlay {
+        		display: none;
+        		/* http://www.visualcsstools.com/ an excellent gradient generator, give it some love */
+				background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 114, color-stop(30%, #808080), color-stop(100%, #000000));
+				background-image: -webkit-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+				background-image: -moz-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+				background-image: -ms-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+				background-image: -o-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+				background-image: radial-gradient(farthest-side circle at center center, #808080 30%, #000000 100%);
+        	}
+
+        	.modalWinDohContainer {
+        		display: none;
+        	}
+
+        	.modalWinDohContainer .content {
+        		position: relative;
+        		max-width: 100%;
+        		max-height: 100%;
+        	}
+
+        	.modalWinDohContainer .content img {
+        		max-width: 100%;
+        		max-height: 100%;
+        		vertical-align: bottom;
+        	}
+
+        	.modalWinDohContainer .close {
+        		display: block;
+        		position: absolute;
+        		top: 0px;
+        		right: 0px;
+        		background: red;
+        		color: #fff;
+        		text-align: center;
+        		padding: 10px;
+        		cursor: pointer;
+        	}
+        </style>
+    </head>
+    <body>
+    	<a href="img/8478551008_ecbdec0cfe_o.jpg" class="modalWinDoh">Open modal</a>
+
+    	<div class="modalWinDohContainer">
+    		<div class="content">
+    			<img src="" alt="">
+    		</div>
+    		<span class="close">&times;</span>
+    	</div>
+
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../jquery.ModalWinDoh.js"></script>
+    <script src="js/jquery.easing.js"></script>
+    </script>
+    <script>
+    	$(document).ready(function() {
+			$('.modalWinDohContainer').modalWinDoh({
+    			overlayAnimationSpeed       : 1000,
+		        overlayEasing               : 'easeInOutExpo',
+		        modalAnimationSpeed         : 500,
+		        modalEasing                 : 'linear'
+    		}).on({
+    			'modalWinDoh.preOpen': function() {
+					console.log('preOpen');
+				},
+				'modalWinDoh.postOpen': function() {
+					console.log('postOpen');
+				},
+				'modalWinDoh.preClose': function() {
+					console.log('preClose');
+				},
+				'modalWinDoh.postClose': function() {
+					console.log('postClose');
+				}
+			});
+
+    		$('.modalWinDoh').on('click', function(evt) {
+				evt.preventDefault();
+				var that = $(this);
+
+				$('.modalWinDohContainer').modalWinDoh('open', function() {
+    				this.find('img').attr('src', that.attr('href'));
+				});
+			});
+
+    		$('.close, #modalWinDohOverlay').on('click', function(evt) {
+    			evt.preventDefault();
+
+    			$('.modalWinDohContainer').modalWinDoh('close', function() {
+    				this.find('img').attr('src', '');
+    			});
+    		});
+
+    		$(window).on('keyup', function(evt) {
+    			if(evt.keyCode == 27) {
+    				$('.modalWinDohContainer').modalWinDoh('close', function() {
+    					this.find('img').attr('src', '');
+    				});
+    			}
+    		});
+    	});
+    </script>
+</html>
