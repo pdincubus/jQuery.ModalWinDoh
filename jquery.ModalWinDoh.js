@@ -33,9 +33,7 @@
             var overlayWidth = $(window).width(),
                 overlayHeight = $(window).height(),
                 $container = this.$element;
-                var options = this.options,
-                modalMaxWidth = overlayWidth - options.modalSpace;
-                modalMaxHeight = overlayHeight - options.modalSpace;
+                var options = this.options;
 
             //trigger for preOpen function callback thingy
             this.$element.trigger('modalWinDoh.preOpen');
@@ -49,8 +47,12 @@
             $('#modalWinDohOverlay').show().css({ position: 'absolute', top: 0, left: 0, zIndex: 4000, width: overlayWidth, height: overlayHeight }).animate({
                 opacity: 1
             }, options.overlayAnimationSpeed, options.overlayEasing, function(){
-                //now show the modal window container
-                $container.css({ position: 'absolute', zIndex: 5000, width: modalMaxWidth, maxHeight: modalMaxHeight }).centre().show().animate({
+                //figure out the centre position for the content container
+                var thisTop = ( ( (overlayHeight - $container.outerHeight()) /2) + $container.parent().scrollTop() + 'px');
+                var thisLeft = ( ( (overlayWidth - $container.outerWidth()) /2) + $container.parent().scrollLeft() + 'px');
+
+                //now show the modal
+                $container.css({ zIndex: 5000, position: 'absolute', top: thisTop, left: thisLeft, maxWidth: $container.outerWidth() }).show().animate({
                     opacity: 1
                 }, options.modalAnimationSpeed, options.modalEasing, function() {
                     //trigger for postOpen function callback thingy
@@ -83,23 +85,6 @@
         }
     };
 
-    //centre func stolen almost verbatim - http://stackoverflow.com/questions/210717/using-jquery-to-center-a-div-on-the-screen
-    //hat tip to those dudes who contributed!
-    //only, I'm British so I corrected the spelling of centre ;)
-    $.fn.centre = function(parent) {
-        if (parent) {
-            parent = this.parent();
-        } else {
-            parent = window;
-        }
-        this.css({
-            position: 'absolute',
-            top: ((($(parent).height() - this.outerHeight()) / 2) + $(parent).scrollTop() + 'px'),
-            left: ((($(parent).width() - this.outerWidth()) / 2) + $(parent).scrollLeft() + 'px')
-        });
-        return this;
-    };
-
     $.fn.modalWinDoh = function(option) {
         var args = Array.prototype.slice.call(arguments);
 
@@ -123,7 +108,6 @@
         overlayEasing               : 'swing',
         modalAnimationSpeed         : 250,
         modalEasing                 : 'swing',
-        modalAnimationStyle         : 'fade',
-        modalSpace                  : 200
+        modalAnimationStyle         : 'fade'
     };
 })(jQuery);
