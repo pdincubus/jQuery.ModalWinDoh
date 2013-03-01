@@ -143,3 +143,9 @@ Everything else is down to you. Do what you want with it. But here's some CSS wh
     cursor: pointer;
 }
 ```
+
+# Disclaimer and stuff
+
+I wrote this because I needed it for something. You might or might not need it. If you use it and it eats your hamster, sure, I'm really sorry about your hamster but don't say I didn't warn you!
+
+I've only tested this is Chrome and Firefox.
