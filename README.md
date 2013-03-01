@@ -76,7 +76,10 @@ $('.modalWinDoh').on('click', function(evt) {
     var that = $(this);
 
     $('.modalWinDohContainer').modalWinDoh('open', function() {
-        this.find('img').attr('src', that.attr('href'));
+        this.find('img').attr('src', that.attr('href')).css({
+            maxWidth: $(window).width(),
+            maxHeight: $(window).height()
+        });
     });
 });
 ```
