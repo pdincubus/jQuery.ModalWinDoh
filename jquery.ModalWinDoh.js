@@ -43,8 +43,7 @@
                 callback.apply(this.$element);
             }
 
-            //let's actually do something. show overlay
-            $('#modalWinDohOverlay').show().css({ position: 'absolute', top: 0, left: 0, zIndex: 4000, width: overlayWidth, height: overlayHeight }).animate({
+            $('#modalWinDohOverlay').show().css({ position: 'fixed', top: 0, left: 0, zIndex: 4000, width: overlayWidth, height: overlayHeight }).animate({
                 opacity: 1
             }, options.overlayAnimationSpeed, options.overlayEasing, function(){
                 //figure out the centre position for the content container
@@ -52,7 +51,7 @@
                 var thisLeft = ( ( (overlayWidth - $container.outerWidth()) /2) + $container.parent().scrollLeft() + 'px');
 
                 //now show the modal
-                $container.css({ zIndex: 5000, position: 'absolute', top: thisTop, left: thisLeft, maxWidth: $container.outerWidth() }).show().animate({
+                $container.css({ zIndex: 5000, position: 'absolute', top: thisTop, left: thisLeft }).show().animate({
                     opacity: 1
                 }, options.modalAnimationSpeed, options.modalEasing, function() {
                     //trigger for postOpen function callback thingy
