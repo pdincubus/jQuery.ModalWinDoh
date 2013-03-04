@@ -110,12 +110,12 @@ Everything else is down to you. Do what you want with it. But here's some CSS wh
 #modalWinDohOverlay {
     display: none;
     /* http://www.visualcsstools.com/ an excellent gradient generator, give it some love */
-    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 114, color-stop(30%, #808080), color-stop(100%, #000000));
-    background-image: -webkit-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
-    background-image: -moz-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
-    background-image: -ms-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
-    background-image: -o-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
-    background-image: radial-gradient(farthest-side circle at center center, #808080 30%, #000000 100%);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 114, color-stop(30%, rgba(128,128,128,0.9)), color-stop(100%, rgba(0,0,0,0.9)));
+    background-image: -webkit-radial-gradient(center center, farthest-side circle, rgba(128,128,128,0.9) 30%, rgba(0,0,0,0.9) 100%);
+    background-image: -moz-radial-gradient(center center, farthest-side circle, rgba(128,128,128,0.9) 30%, rgba(0,0,0,0.9) 100%);
+    background-image: -ms-radial-gradient(center center, farthest-side circle, rgba(128,128,128,0.9) 30%, rgba(0,0,0,0.9) 100%);
+    background-image: -o-radial-gradient(center center, farthest-side circle, rgba(128,128,128,0.9) 30%, rgba(0,0,0,0.9) 100%);
+    background-image: radial-gradient(farthest-side circle at center center, rgba(128,128,128,0.9) 30%, rgba(0,0,0,0.9) 100%);
 }
 
 .modalWinDohContainer {
