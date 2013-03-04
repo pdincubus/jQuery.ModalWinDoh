@@ -106,7 +106,6 @@
         overlayAnimationSpeed       : 250,
         overlayEasing               : 'swing',
         modalAnimationSpeed         : 250,
-        modalEasing                 : 'swing',
-        modalAnimationStyle         : 'fade'
+        modalEasing                 : 'swing'
     };
 })(jQuery);
