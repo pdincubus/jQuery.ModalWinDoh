@@ -6,6 +6,10 @@ This is going to be slightly more complicated than your average modal window plu
 
 I've built in "preOpen", "postOpen", "preClose" and "postClose" triggers as well as a callback option which will give you LOTS of flexibility to enhance the basics.
 
+[Basic demo](http://pdincubus.github.com/jQuery.ModalWinDoh/)
+
+There's no image preloader or anything yet. Check out the demo page source for most things you'll need to know, or see below...
+
 ## Basic setup
 
 First, you're going to need some HTML. A link which we'll use to trigger the modal opening, and below that is the scaffold of our actual modal win d'oh.
