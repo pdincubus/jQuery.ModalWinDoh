@@ -6,106 +6,107 @@
 */
 
 (function($) {
-    var modalWinDoh = function(elem, options) {
-        this.init(elem, 'modalWinDoh', options);
-    };
+	var modalWinDoh = function(elem, options) {
+		this.init(elem, 'modalWinDoh', options);
+	};
 
-    modalWinDoh.prototype = {
-        constructor: this,
-        init: function(element, type, options) {
-            this.type = type;
-            this.$element = $(element);
-            this.options = this.getOptions(options);
+	modalWinDoh.prototype = {
+		constructor: this,
 
-            //set the basics for the overlay background
-            var overlayHtml = '<div id="modalWinDohOverlay"></div>';
-            $('body').append(overlayHtml);
-            $('#modalWinDohOverlay').hide().css({ opacity: 0 });
-        },
+		init: function(element, type, options) {
+			this.type = type;
+			this.$element = $(element);
+			this.options = this.getOptions(options);
 
-        getOptions: function(options) {
-            options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data());
-            return options;
-        },
+			//set the basics for the overlay background
+			var overlayHtml = '<div id="modalWinDohOverlay"></div>';
+			$('body').append(overlayHtml);
+			$('#modalWinDohOverlay').hide().css({ opacity: 0 });
+		},
 
-        open: function(callback) {
-            //set some basics
-            var overlayWidth = $(window).width(),
-                overlayHeight = $(window).height(),
-                $container = this.$element;
-                var options = this.options;
+		getOptions: function(options) {
+			options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data());
+			return options;
+		},
 
-            //trigger for preOpen function callback thingy
-            this.$element.trigger('modalWinDoh.preOpen');
+		open: function(callback) {
+			//set some basics
+			var overlayWidth = $(window).width(),
+			overlayHeight = $(window).height(),
+			$container = this.$element;
+			var options = this.options;
 
-            //hook some stuff in, like where to find the modal content. You know, useful stuff
-            if (callback) {
-                callback.apply(this.$element);
-            }
+			//trigger for preOpen function callback thingy
+			this.$element.trigger('modalWinDoh.preOpen');
 
-            $('#modalWinDohOverlay').show().css({ position: 'fixed', top: 0, left: 0, zIndex: 4000, width: overlayWidth, height: overlayHeight }).animate({
-                opacity: 1
-            }, options.overlayAnimationSpeed, options.overlayEasing, function(){
-                //figure out the centre position for the content container
-                var thisTop = ( ( (overlayHeight - $container.outerHeight()) /2) + $container.parent().scrollTop() + 'px');
-                var thisLeft = ( ( (overlayWidth - $container.outerWidth()) /2) + $container.parent().scrollLeft() + 'px');
+			//hook some stuff in, like where to find the modal content. You know, useful stuff
+			if (callback) {
+				callback.apply(this.$element);
+			}
 
-                //now show the modal
-                $container.css({ zIndex: 5000, position: 'absolute', top: thisTop, left: thisLeft }).show().animate({
-                    opacity: 1
-                }, options.modalAnimationSpeed, options.modalEasing, function() {
-                    //trigger for postOpen function callback thingy
-                    $container.trigger('modalWinDoh.postOpen');
-                });
-            });
-        },
+			$('#modalWinDohOverlay').show().css({ position: 'fixed', top: 0, left: 0, zIndex: 4000, width: overlayWidth, height: overlayHeight }).animate({
+				opacity: 1
+			}, options.overlayAnimationSpeed, options.overlayEasing, function(){
+				//figure out the centre position for the content container
+				var thisTop = ( ( (overlayHeight - $container.outerHeight()) /2) + $container.parent().scrollTop() + 'px');
+				var thisLeft = ( ( (overlayWidth - $container.outerWidth()) /2) + $container.parent().scrollLeft() + 'px');
 
-        close: function() {
-            $container = this.$element;
-            var options = this.options;
+				//now show the modal
+				$container.css({ zIndex: 5000, position: 'absolute', top: thisTop, left: thisLeft }).show().animate({
+					opacity: 1
+				}, options.modalAnimationSpeed, options.modalEasing, function() {
+					//trigger for postOpen function callback thingy
+					$container.trigger('modalWinDoh.postOpen');
+				});
+			});
+		},
 
-            //trigger for preClose function callback thingy
-            $container.trigger('modalWinDoh.preClose');
+		close: function() {
+			$container = this.$element;
+			var options = this.options;
 
-            //hide the modal container
-            $container.animate({
-                opacity: 0
-            }, options.modalAnimationSpeed, options.modalEasing, function() {
-                $container.hide();
-                //hide the overlay
-                $('#modalWinDohOverlay').animate({
-                    opacity: 0
-                }, options.overlayAnimationSpeed, options.overlayEasing, function() {
-                    $('#modalWinDohOverlay').hide();
-                });
-                //trigger for postClose function callback thingy
-                $container.trigger('modalWinDoh.postClose');
-            });
-        }
-    };
+			//trigger for preClose function callback thingy
+			$container.trigger('modalWinDoh.preClose');
 
-    $.fn.modalWinDoh = function(option) {
-        var args = Array.prototype.slice.call(arguments);
+			//hide the modal container
+			$container.animate({
+				opacity: 0
+			}, options.modalAnimationSpeed, options.modalEasing, function() {
+				$container.hide();
+				//hide the overlay
+				$('#modalWinDohOverlay').animate({
+					opacity: 0
+				}, options.overlayAnimationSpeed, options.overlayEasing, function() {
+					$('#modalWinDohOverlay').hide();
+				});
+				//trigger for postClose function callback thingy
+				$container.trigger('modalWinDoh.postClose');
+			});
+		}
+	};
 
-        return this.each(function() {
-            var $this = $(this),
-               data = $this.data('modalWinDoh'),
-               options = typeof option == 'object' && option;
+	$.fn.modalWinDoh = function(option) {
+		var args = Array.prototype.slice.call(arguments);
 
-            if (!data) {
-                $this.data('modalWinDoh', (data = new modalWinDoh(this, options)));
-            }
+		return this.each(function() {
+			var $this = $(this),
+			data = $this.data('modalWinDoh'),
+			options = typeof option == 'object' && option;
 
-            if (typeof option == 'string') {
-                data[option].apply(data, args.slice(1));
-            }
-        });
-    };
+			if (!data) {
+				$this.data('modalWinDoh', (data = new modalWinDoh(this, options)));
+			}
 
-    $.fn.modalWinDoh.defaults = {
-        overlayAnimationSpeed       : 250,
-        overlayEasing               : 'swing',
-        modalAnimationSpeed         : 250,
-        modalEasing                 : 'swing'
-    };
+			if (typeof option == 'string') {
+				data[option].apply(data, args.slice(1));
+			}
+		});
+	};
+
+	$.fn.modalWinDoh.defaults = {
+		overlayAnimationSpeed		: 250,
+		overlayEasing				: 'swing',
+		modalAnimationSpeed			: 250,
+		modalEasing					: 'swing'
+	};
 })(jQuery);
