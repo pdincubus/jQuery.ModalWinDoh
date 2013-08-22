@@ -1,0 +1,54 @@
+/*
+ * jQuery.ModalWinDoh
+ * @repo: https://github.com/pdincubus/jQuery.ModalWinDoh
+ * @author: Phil Steer
+ * @version: 0.2
+ *
+ * Base CSS styles
+ * Use them, or lose them.
+ * Gradients created on:
+ * http://www.visualcsstools.com/
+ * an excellent gradient generator, give it some love!
+ */
+
+#modalWinDohOverlay {
+    display: none;
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 114, color-stop(30%, #808080), color-stop(100%, #000000));
+    background-image: -webkit-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+    background-image: -moz-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+    background-image: -ms-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+    background-image: -o-radial-gradient(center center, farthest-side circle, #808080 30%, #000000 100%);
+    background-image: radial-gradient(farthest-side circle at center center, #808080 30%, #000000 100%);
+}
+
+#modalWinDohContainer {
+    display: none;
+    background: #fff;
+    padding: 20px;
+}
+
+#modalWinDohContainer .content {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.modalWinDohContainer .content img {
+    max-width: 100%;
+    vertical-align: bottom;
+    margin: 0 auto;
+}
+
+.modalWinDohContainer .close {
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    cursor: pointer;
+}
